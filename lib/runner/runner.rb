@@ -13,12 +13,16 @@ class Runner
     end
   end
 
-  def self.!(*args)
+  def self.!(*args, &reject_blk)
     logger = Logger.get self
 
     base_dir = File.expand_path(File.dirname(caller[0]))
     patterns = file_patterns(args)
     files = glob(patterns, base_dir)
+
+    if block_given?
+      files.reject! &reject_blk
+    end
 
     if files.empty?
       logger.error "No files found for file patterns: #{patterns.join(', ')}"
