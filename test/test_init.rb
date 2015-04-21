@@ -6,4 +6,4 @@ puts RUBY_DESCRIPTION
 
 require_relative '../init.rb'
 
-TestLogger = Logger.get 'Test Output'
+TestLogger = ::Telemetry::Logger.get 'Test Output'

@@ -1,5 +1,5 @@
 class Runner
-  dependency :logger
+  dependency :logger, ::Telemetry::Logger
 
   attr_reader :files
 
@@ -14,7 +14,7 @@ class Runner
   end
 
   def self.!(*args, &reject_blk)
-    logger = Logger.get self
+    logger = ::Telemetry::Logger.get self
 
     base_dir = File.expand_path(File.dirname(caller[0]))
     patterns = file_patterns(args)
