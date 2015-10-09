@@ -13,7 +13,7 @@ class Runner
     end
   end
 
-  def self.!(*args, &reject_blk)
+  def self.call(*args, &reject_blk)
     logger = ::Telemetry::Logger.get self
 
     base_dir = File.expand_path(File.dirname(caller[0]))
@@ -30,8 +30,9 @@ class Runner
     end
 
     instance = new files
-    instance.!
+    instance.()
   end
+  class << self; alias :! :call; end # TODO: Remove deprecated actuator [Kelsey, Thu Oct 08 2015]
 
   def self.glob(patterns, base_dir)
     files = []
@@ -50,13 +51,14 @@ class Runner
     patterns
   end
 
-  def !
+  def call
     files.each do |file|
       load file
     end
 
     return self.class.success_code
   end
+  alias :! :call # TODO: Remove deprecated actuator [Kelsey, Thu Oct 08 2015]
 
   def self.failure_code
     1
