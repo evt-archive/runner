@@ -1,6 +1,4 @@
 require_relative 'spec_init'
-require 'minitest/autorun'
-
 
 describe 'Exclude from runner' do
   it 'runs all of the files except those excluded' do
