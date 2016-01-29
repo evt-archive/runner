@@ -1,7 +1,7 @@
 require_relative 'spec_init'
 
-describe 'Runner' do
-  it 'runs all of the files' do
+context 'Runner' do
+  test 'runs all of the files' do
     $example_1_ran = false
     $example_2_ran = false
 
